@@ -93,6 +93,16 @@ const Task = () => {
               Delete
             </button>
           </li>
+          <li>
+          {e.name}
+            <button
+              onClick={() => {
+                updatetask(e._id);
+              }}
+            >
+              Update
+            </button>
+            </li>
           {console.log()}{" "}
         </ul>
       ))}
