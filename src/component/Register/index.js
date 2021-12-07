@@ -14,7 +14,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("61a48ba866acf4f8462bf345");
 
-  const singup = async () => {
+  const newuser = async () => {
     try {
       const result = await axios.post(`${process.env.REACT_APP_BASE_URL}/regester`, {
         email,
@@ -22,7 +22,7 @@ const Register = () => {
         role
       });
       console.log(result);
-      navigate("/login")
+      // navigate("/login")
     } catch (err) {
       console.log(err);
     }
@@ -48,7 +48,7 @@ const Register = () => {
           setPassword(e.target.value);
         }}
       />
-      <button onClick={singup}>Regester</button>
+      <button onClick={newuser}>Regester</button>
       </div>
     </>
   );
