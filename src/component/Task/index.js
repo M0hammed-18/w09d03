@@ -21,6 +21,7 @@ const Task = () => {
     taskshow();
   }, []);
 
+
   const taskshow = async () => {
     const result = await axios.get(`${BASE_URL}/tasks`,{
       headers: {
@@ -54,6 +55,20 @@ const Task = () => {
       console.log(error);
     }
   };
+
+  const updatetask =async(id)=>{
+    const update= await axios.put(`${BASE_URL}/editTask${id}`,{
+      task:task,
+    },
+    {
+      headers:{
+        Authorization:`Bearer${local}`
+      },
+    }
+    
+    )
+    taskshow(local);
+  }
 
   return (
     <div className="desing">
