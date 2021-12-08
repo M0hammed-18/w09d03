@@ -1,7 +1,8 @@
+
 .desing{
     text-align: center;
     width: 100%;
-    height: 600px;
+    
     display: flex;
     flex-direction: column;
     background-color: lightblue;

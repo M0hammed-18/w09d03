@@ -1,20 +1,22 @@
 const initiqlState = {
-  task: "",
-  isDel: false,
+  task: [],
 };
 
 const Tasks = (state = initiqlState, action) => {
   const { type, payload } = action;
   switch (type) {
     case "READ":
-      return { task, isDel };
+      return { task};
+
     case "CREATE":
-      return { task, isDel: false };
+      return { task };
+      
     case "UPDATE":
-      const { task, isDel } = payload;
-        return { task, isDel };
+      const { task} = payload;
+        return { task };
+        
       case "DELETE":
-          return{task,isDel:true}
+          return{task}
 
           default:
               return state;

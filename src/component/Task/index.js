@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaRegKissWinkHeart } from "react-icons/fa";
 import { Navigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const Task = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [token,setToken]=useState("")
   const [task, setTask] = useState([]);
   const [local, setLocal] = useState("");
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const Task = () => {
     setTask(result.data);
   };
 
-  const del = async (id) => {
+  const deltask = async (id) => {
     try {
       const res = await axios.delete(`${BASE_URL}/delete/${id}`);
       taskshow();
@@ -84,7 +86,9 @@ const Task = () => {
   };
 
   return (
-    <div className="desing">
+    <>
+        
+        <div className="desing">
       <button onClick={logout}> Enjoy with your life </button>
       <h1>
         {" "}
@@ -105,7 +109,7 @@ const Task = () => {
             {e.name}
             <button
               onClick={() => {
-                del(e._id);
+                deltask(e._id);
               }}
             >
               Delete
@@ -125,6 +129,7 @@ const Task = () => {
       ))}
       
     </div>
+        </>
   );
 };
 
