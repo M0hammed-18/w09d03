@@ -10,17 +10,18 @@ import Tasks,{readTask,createTask,deleteTask} from "../../reducers/task";
 
 const Task = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const [token,setToken]=useState("")
   const [task, setTask] = useState([]);
   const [local, setLocal] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const state = useSelector((state) => {
     return {
       signin: state.Signin,
       tasks: state.Tasks,
     };
   });
+  
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     setLocal(savedToken);
@@ -29,6 +30,7 @@ const Task = () => {
 
   const taskshow = async () => {
     const result = await axios.get(`${BASE_URL}/tasks`, {
+
       headers: {
         Authorization: `Bearer ${local}`,
       },
@@ -45,7 +47,7 @@ const Task = () => {
     }
   };
   const [newtask, setNewtask] = useState("");
-
+  const [updattask, setUpdattask] = useState("");
   const addtask = async () => {
     try {
       const res = await axios.post(
@@ -67,9 +69,9 @@ const Task = () => {
 
   const updatetask = async (id) => {
     const update = await axios.put(
-      `${BASE_URL}/editTask${id}`,
+      `${BASE_URL}/editTask/${id}`,
       {
-        task: task,
+        name:updattask,
       },
       {
         headers: {
@@ -81,7 +83,6 @@ const Task = () => {
   };
 
   const logout = () => {
-    dispatch(logout({ user: null, token: "" }));
     localStorage.clear();
     navigate("/login");
   };
@@ -90,7 +91,7 @@ const Task = () => {
     <>
         
         <div className="desing">
-      <button onClick={logout}> Enjoy with your life </button>
+      <button id="logout" onClick={logout}> Bye </button>
       <h1>
         {" "}
         Here you can organize your life please write Tasks{" "}

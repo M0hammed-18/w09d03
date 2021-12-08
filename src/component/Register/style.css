@@ -54,3 +54,8 @@ h1{
     font-size: 30px;
     text-align: center;
 }
+#logout{
+  color: black;
+  margin-left: 2%;
+width: 10%;
+}

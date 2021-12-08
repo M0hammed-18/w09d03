@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { log } from "./../../reducers/login";
+import signIn from "./../../reducers/login";
 import Task from "./../Task"
 import { FaRegGrinSquintTears } from "react-icons/fa";
 
@@ -30,6 +30,7 @@ const Login = () => {
         email,
         password,
       });
+      console.log("ll");
       console.log(result.data.token);
       if(result.data.token){
       localStorage.setItem("token", result.data.token);
@@ -38,12 +39,14 @@ const Login = () => {
       const data ={
         user: result.data.result,
         token: result.data.token
-      }
+      };
+      console.log(data);
+      dispatch(signIn(data))
     } catch (err) {
       console.log(err);
     }
 
-    navigate("/tasks");
+    // navigate("/tasks");
   };
   return (
     <div className="desing">
@@ -71,7 +74,7 @@ const Login = () => {
       >Login</button>
       </div>
       ):(
-<h3></h3>
+<h1></h1>
       )}
     </div>
   );

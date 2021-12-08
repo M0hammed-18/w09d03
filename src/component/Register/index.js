@@ -16,13 +16,13 @@ const Register = () => {
 
   const newuser = async () => {
     try {
-      const result = await axios.post(`${process.env.REACT_APP_BASE_URL}/regester`, {
+      const result = await axios.post(`${BASE_URL}/regester`, {
         email,
         password,
         role
       });
       console.log(result);
-      // navigate("/login")
+      navigate("/login")
     } catch (err) {
       console.log(err);
     }
