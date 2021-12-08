@@ -47,7 +47,8 @@ const Login = () => {
   };
   return (
     <div className="desing">
-     
+     {!local?(
+       <div>
       <h2> One more step to orgnize your life  <FaRegGrinSquintTears/> </h2>
       <h5>Login please</h5>
       <input
@@ -68,6 +69,10 @@ const Login = () => {
       />
       <button onClick={login} 
       >Login</button>
+      </div>
+      ):(
+<h3></h3>
+      )}
     </div>
   );
 };
