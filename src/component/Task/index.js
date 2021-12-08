@@ -1,35 +1,37 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaRegKissWinkHeart } from "react-icons/fa";
+import { Navigate } from "react-router";
 
 const Task = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [task, setTask] = useState([]);
   const [local, setLocal] = useState("");
-  const  dispatch = useDispatch();
-  const state =useSelector((state)=>{
-    return{
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => {
+    return {
       signin: state.Signin,
-      tasks:state.Tasks,
-    }
-  })
+      tasks: state.Tasks,
+    };
+  });
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     setLocal(savedToken);
     taskshow();
   }, []);
 
-
   const taskshow = async () => {
-    const result = await axios.get(`${BASE_URL}/tasks`,{
+    const result = await axios.get(`${BASE_URL}/tasks`, {
       headers: {
-        Authorization: `Bearer ${local}`
-      },})
+        Authorization: `Bearer ${local}`,
+      },
+    });
     setTask(result.data);
   };
-
 
   const del = async (id) => {
     try {
@@ -43,36 +45,52 @@ const Task = () => {
 
   const addtask = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/task`, {
-        name: newtask,
-      },
-      {
-        headers:{
-        Authorization:`Bearer ${local}`
-      }});
+      const res = await axios.post(
+        `${BASE_URL}/task`,
+        {
+          name: newtask,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${local}`,
+          },
+        }
+      );
       taskshow(local);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updatetask =async(id)=>{
-    const update= await axios.put(`${BASE_URL}/editTask${id}`,{
-      task:task,
-    },
-    {
-      headers:{
-        Authorization:`Bearer${local}`
+  const updatetask = async (id) => {
+    const update = await axios.put(
+      `${BASE_URL}/editTask${id}`,
+      {
+        task: task,
       },
-    }
-    
-    )
+      {
+        headers: {
+          Authorization: `Bearer${local}`,
+        },
+      }
+    );
     taskshow(local);
-  }
+  };
+
+  const logout = () => {
+    dispatch(logout({ user: null, token: "" }));
+    localStorage.clear();
+    navigate("/login");
+  };
 
   return (
     <div className="desing">
-      <h1> Here you can organize your life  please write Tasks <FaRegKissWinkHeart/></h1>
+      <button onClick={logout}> Enjoy with your life </button>
+      <h1>
+        {" "}
+        Here you can organize your life please write Tasks{" "}
+        <FaRegKissWinkHeart />
+      </h1>
       <input
         onChange={(e) => {
           setNewtask(e.target.value);
@@ -94,7 +112,6 @@ const Task = () => {
             </button>
           </li>
           <li>
-          {e.name}
             <button
               onClick={() => {
                 updatetask(e._id);
@@ -102,10 +119,11 @@ const Task = () => {
             >
               Update
             </button>
-            </li>
-          {console.log()}{" "}
+          </li>
         </ul>
+        
       ))}
+      
     </div>
   );
 };
