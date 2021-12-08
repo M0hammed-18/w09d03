@@ -37,7 +37,7 @@ h5{
 }
 ul{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: rgb(150, 153, 146);
     margin-left: 33%;
     width: 30%;
@@ -45,7 +45,7 @@ ul{
 }
 li{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
     font-size: 20px;
 }
@@ -58,4 +58,21 @@ h1{
   color: black;
   margin-left: 2%;
 width: 10%;
+}
+#edit{
+    width: 70%;
+    height: 20px;
+    background-color: rgb(27, 27, 43);
+    font-size: 10%;
+    color: chocolate;
+}
+#benedit{
+    width: 70%;  
+}
+#bendel{
+    width: 110%;
+}
+#icon{
+    color: rgb(230, 196, 8);
+    font-size: 110%;
 }

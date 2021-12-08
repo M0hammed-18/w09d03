@@ -14,7 +14,7 @@ const instialState = {
   
       case "LOGOUT":
         localStorage.clear();
-        return payload;
+        return {user: null, token:""};
   
       default:
         return state;

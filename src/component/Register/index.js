@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./style.css";
 import { FaRegGrinTongue } from "react-icons/fa";
+import {BsFillEmojiHeartEyesFill } from "react-icons/bs";
 
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -48,7 +49,7 @@ const Register = () => {
           setPassword(e.target.value);
         }}
       />
-      <button onClick={newuser}>Regester</button>
+      <button onClick={newuser}>Regester <BsFillEmojiHeartEyesFill/></button>
       </div>
     </>
   );

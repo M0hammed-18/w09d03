@@ -31,22 +31,22 @@ const Login = () => {
         password,
       });
       console.log("ll");
-      console.log(result.data.token);
-      if(result.data.token){
+      console.log(result);
+      // if(result.data.token){
       localStorage.setItem("token", result.data.token);
-      }
+      // }
 
       const data ={
         user: result.data.result,
         token: result.data.token
       };
-      console.log(data);
+      console.log(result.data.token,"this data");
       dispatch(signIn(data))
     } catch (err) {
-      console.log(err);
+      console.log(err,"what");
     }
 
-    // navigate("/tasks");
+    navigate("/tasks");
   };
   return (
     <div className="desing">

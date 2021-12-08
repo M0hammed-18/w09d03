@@ -7,6 +7,8 @@ import { FaRegKissWinkHeart } from "react-icons/fa";
 import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 import Tasks,{readTask,createTask,deleteTask} from "../../reducers/task";
+import { logout } from "../../reducers/login";
+import {BsFillEmojiFrownFill}  from "react-icons/bs"
 
 const Task = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -82,8 +84,10 @@ const Task = () => {
     taskshow(local);
   };
 
-  const logout = () => {
-    localStorage.clear();
+  const logoutt = () => {
+    // localStorage.clear();
+    dispatch(logout({user: null, token:""}))
+
     navigate("/login");
   };
 
@@ -91,12 +95,13 @@ const Task = () => {
     <>
         
         <div className="desing">
-      <button id="logout" onClick={logout}> Bye </button>
+      <button id="logout" onClick={logoutt}> Bye <BsFillEmojiFrownFill id="icon"/> </button>
       <h1>
         {" "}
         Here you can organize your life please write Tasks{" "}
         <FaRegKissWinkHeart />
       </h1>
+      
       <input
         onChange={(e) => {
           setNewtask(e.target.value);
@@ -105,11 +110,13 @@ const Task = () => {
         placeholder="add task"
       />{" "}
       <button onClick={addtask}>add</button>
+      
       {task.map((e) => (
+        <div className="task">
         <ul>
           <li>
             {e.name}
-            <button
+            <button id="bendel"
               onClick={() => {
                 deltask(e._id);
               }}
@@ -118,7 +125,12 @@ const Task = () => {
             </button>
           </li>
           <li>
-            <button
+          <input id="edit"
+              className="editInput"
+              onChange={(e) => setUpdattask(e.target.value)}
+              placeholder="Enter to update your task " 
+            />
+            <button id="benedit"
               onClick={() => {
                 updatetask(e._id);
               }}
@@ -127,6 +139,7 @@ const Task = () => {
             </button>
           </li>
         </ul>
+        </div>
         
       ))}
       
